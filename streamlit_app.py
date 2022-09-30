@@ -5,16 +5,10 @@ import pandas as pd
 
 lit.title("Zena's Amazing Athleisure Catalog")
 
-lit.header("View Our Fruit List - Add Your Favorites!")
-
-def get_color_list():
-  with my_cnx.cursor() as my_cur:
-    my_cur.execute("select distinct color_or_style from catalog")
-    return my_cur.fetchall()
 
 my_cnx = snowflake.connector.connect(**lit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
-my_data_row_2 = get_color_list()
+my_data_row_2 =  my_cur.execute("select distinct color_or_style from catalog")
 df = pd.DataFrame(my_data_row_2)
 color_list = df[0].values.tolist()
 

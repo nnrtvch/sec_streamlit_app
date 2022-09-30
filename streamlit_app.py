@@ -1,6 +1,7 @@
 import streamlit as lit
 import requests
 import snowflake.connector
+import pandas as pd
 
 lit.title("Zena's Amazing Athleisure Catalog")
 
@@ -21,9 +22,8 @@ if lit.button('Get fruit list'):
 my_cnx = snowflake.connector.connect(**lit.secrets["snowflake"])
 my_data_row_2 = get_color_list()
 my_cnx.close()
-fruits_selected  = lit.multiselect('Pick some fruits: ', list(my_data_row_2))
-fruits_to_show = my_fruit_list.loc[fruits_selected]
-lit.dataframe(fruits_to_show)
+df = pd.DataFrame(my_data_row_2)
+streamlit.write(df)
 lit.stop()
   
 my_fruit_list = pd.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt")

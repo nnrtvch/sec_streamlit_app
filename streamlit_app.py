@@ -11,3 +11,5 @@ my_cur.execute("select color_or_style from catalog_for_website")
 color_catalogue = my_cur.fetchall()
 
 df = pd.DataFrame(color_catalogue)
+
+color_list = df[0].values.tolist()

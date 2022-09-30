@@ -23,7 +23,7 @@ my_cnx = snowflake.connector.connect(**lit.secrets["snowflake"])
 my_data_row_2 = get_color_list()
 my_cnx.close()
 df = pd.DataFrame(my_data_row_2)
-streamlit.write(df)
+lit.write(df)
 lit.stop()
   
 my_fruit_list = pd.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt")

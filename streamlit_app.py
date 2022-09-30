@@ -24,6 +24,8 @@ my_data_row_2 = get_color_list()
 my_cnx.close()
 df = pd.DataFrame(my_data_row_2)
 color_list = df[0].values.tolist()
+option = lit.selectbox('Pick a sweatsuit color or style:', list(color_list))
+
 lit.stop()
   
 my_fruit_list = pd.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt")

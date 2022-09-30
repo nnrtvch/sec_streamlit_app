@@ -15,7 +15,6 @@ def get_color_list():
 my_cnx = snowflake.connector.connect(**lit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
 my_data_row_2 = get_color_list()
-my_cnx.close()
 df = pd.DataFrame(my_data_row_2)
 color_list = df[0].values.tolist()
 

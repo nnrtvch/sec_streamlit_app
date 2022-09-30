@@ -1,2 +1,2 @@
 import streamlit as lit
-lit.title('My parents new Healthy Menu')
+lit.title("Zena's Amazing Athleisure Catalog")

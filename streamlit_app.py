@@ -12,10 +12,10 @@ def get_color_list():
     return my_cur.fetchall()
   
 if lit.button('Get fruit list'):
-my_cnx = snowflake.connector.connect(**lit.secrets["snowflake"])
-my_data_row = get_color_list()
-my_cnx.close()
-lit.dataframe(my_data_row)
+  my_cnx = snowflake.connector.connect(**lit.secrets["snowflake"])
+  my_data_row = get_color_list()
+  my_cnx.close()
+  lit.dataframe(my_data_row)
 
 lit.pause()
 

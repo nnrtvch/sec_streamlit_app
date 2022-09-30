@@ -11,35 +11,25 @@ def get_color_list():
   with my_cnx.cursor() as my_cur:
     my_cur.execute("select distinct color_or_style from catalog")
     return my_cur.fetchall()
-  
-if lit.button('Get fruit list'):
-  my_cnx = snowflake.connector.connect(**lit.secrets["snowflake"])
-  my_data_row = get_color_list()
-  my_cnx.close()
-  ert = list(my_data_row)
-  lit.dataframe(ert)
 
 my_cnx = snowflake.connector.connect(**lit.secrets["snowflake"])
 my_data_row_2 = get_color_list()
 my_cnx.close()
 df = pd.DataFrame(my_data_row_2)
 color_list = df[0].values.tolist()
+
 option = lit.selectbox('Pick a sweatsuit color or style:', list(color_list))
+product_caption = 'Our warm, comfortable, ' + option + ' sweatsuit!'
+
+my_cur.execute("select direct_url, price, size_list, upsell_product_desc from catalog_for_website where
+color_or_style = '" + option + "';")
+df2 = my_cur.fetchone()
+
+streamlit.image(
+  df2[0],
+  width=400,
+  caption= product_caption
+)
+
 
 lit.stop()
-  
-my_fruit_list = pd.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt")
-my_fruit_list = my_fruit_list.set_index('Fruit')
-
-
-fruits_to_show = my_fruit_list.loc[fruits_selected]
-lit.dataframe(fruits_to_show)
-
-
-
-my_fruit_list = pd.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt")
-my_fruit_list = my_fruit_list.set_index('Fruit')
-
-fruits_selected  = lit.multiselect('Pick some fruits: ', list(my_fruit_list.index), ['Avocado', 'Strawberries'])
-fruits_to_show = my_fruit_list.loc[fruits_selected]
-lit.dataframe(fruits_to_show)

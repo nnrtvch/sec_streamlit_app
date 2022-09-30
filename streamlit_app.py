@@ -1,4 +1,7 @@
 import streamlit as lit
+import requests
+import snowflake.connector
+
 lit.title("Zena's Amazing Athleisure Catalog")
 
 lit.header("View Our Fruit List - Add Your Favorites!")
